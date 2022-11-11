@@ -3,6 +3,7 @@ import { nanoid } from 'nanoid';
 import { Form } from './Form'
 import { Filter } from './Filter';
 import { ContactsList } from "./ContactsList";
+import styles from '../styles/styles.module.css';
 
 export class App extends Component {
   state = {
@@ -31,20 +32,25 @@ export class App extends Component {
   }
 
   addContact = ({name, number}) => {
-    const contact = {
+    const { contacts } = this.state;
+    const newName = {
       id: nanoid(),
       name,
       number,
     }
 
-    if(this.state.contacts.find( contact => contact.name === name)) {
-      return alert(`${name} is already in contacts`)
+    if (
+      contacts.every(
+        ({ name }) => name.toLowerCase() !== newName.name.toLowerCase()
+      )
+    ) {
+      this.setState((prevState) => ({
+        contacts: [newName, ...prevState.contacts],
+      }));
+    } else {
+      alert(`${newName.name} is already in contacts`);
     }
-
-    this.setState(({contacts}) => ({
-      contacts: [contact, ...contacts]
-    }))
-  }
+  };
 
   changeFilter = e => {
     this.setState({filter: e.currentTarget.value});
@@ -66,33 +72,13 @@ export class App extends Component {
 
     return (
       <>
-        <div
- style={{
-      width: "320px",
-      margin: "7px",
-      marginRight: "auto",
-      marginLeft: "auto",
-      textAlign: "center",
-      paddingTop: "6px",
-      paddingBottom: "6px",
-      borderRadius: "4px",
-      boxShadow: "0px 0px 5px 2px rgba(174,183,227,1)",
-  }}>
+        <div>
           
-          <h2
-          style={{
-            marginBottom: "18px",
-            color: "rgba(174,183,227,1)"
-          }}>Phonebook</h2>
+          <h2>Phonebook</h2>
           
           <Form onSubmit={this.addContact}/>
           
-          <h3
-          style={{
-            marginBottom: "16px",
-            color: "rgba(174,183,227,1)"
-          }}
-          >Contacts</h3>
+          <h3>Contacts</h3>
 
           <Filter 
             value={filter}
@@ -109,3 +95,5 @@ export class App extends Component {
     )
   }
 };
+
+export default styles;

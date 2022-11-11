@@ -1,32 +1,15 @@
 import PropTypes from 'prop-types'
+// import styles from '../styles/styles.module.css';
 
 export const ContactsList = ({ contacts, onDeleteContact }) => {
     return (
-        <ul
-        style={{
-            margin:"10px",
-            textAlign: "left",
-            color: "rgba(174,183,227,1)",
-        }}>
+        <ul>
         {contacts.map(({id, name, number}) => (
                 <li
                 key={id} >
              <label>{`${name}: ${number}`}</label>
              <button
                     type="button"
-                    style={{
-                    width:"auto",
-                    marginLeft: "10px",
-                    textAlign: "right",
-                    height:"16px",
-                    border: "none",
-                    cursor: "pointer",
-                    borderRadius: "30%",
-                    padding: 0,
-                    color: "rgba(174,183,37,1)",
-                    boxShadow: "0px 0px 5px 2px rgba(174,183,227,1)",
-                    }}
-
                     onClick={() => onDeleteContact(id)}
                     >Delete
               </button>

@@ -1,20 +1,10 @@
 import PropTypes from 'prop-types';
+// import styles from '../styles/styles.module.css';
 
 export const Filter = ({value, onChange}) => {
     return(
-        <label
-        style={{
-            marginRight: "auto",
-            marginLeft: "auto",
-            textAlign: "center",
-            width: "200px",
-            marginBottom: "20px",
-          }}>
-            <p
-             style={{
-                marginBottom: "10px",
-                color: "rgba(174,183,227,1)"
-              }}>Find contact by name</p>
+        <label>
+            <p>Find contact by name</p>
             <input 
             type="text" 
             value={value}
